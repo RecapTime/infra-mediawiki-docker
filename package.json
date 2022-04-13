@@ -1,0 +1,22 @@
+{
+  "name": "@recaptime-infra/mediawiki-docker",
+  "version": "0.1.0",
+  "description": "Infrastructure code for running MediaWiki in Docker, with plugins handpicked by the crew.",
+  "main": "index.js",
+  "scripts": {
+    "local:setup": "docker-compose up -d",
+    "local:start": "docker-compose -f existing-config.docker-compose.yml up -d",
+    "local:stop": "docker-compose down",
+    "local:logs": "docker-compose logs --tail=all --follow"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RecapTime/infra-mediawiki-docker.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/RecapTime/infra-mediawiki-docker/issues"
+  },
+  "homepage": "https://github.com/RecapTime/infra-mediawiki-docker#readme",
+  "packageManager": "yarn@3.2.0"
+}

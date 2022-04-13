@@ -1,0 +1,32 @@
+version: '3'
+services:
+  mediawiki:
+    image: mediawiki:1.37
+    restart: always
+    ports:
+      - 8080:80
+    links:
+      - database
+    volumes:
+      - mediawiki-image-store:/var/www/html/images
+      # After initial setup, download LocalSettings.php to the same directory as
+      # this yaml and uncomment the following line and use compose to restart
+      # the mediawiki service
+      - ./config/LocalSettings.php:/var/www/html/LocalSettings.php
+  # This key also defines the name of the database host used during setup instead of the default "localhost"
+  database:
+    image: mariadb
+    restart: always
+    hostname: mwdb
+    environment:
+      # @see https://phabricator.wikimedia.org/source/mediawiki/browse/master/includes/DefaultSettings.php
+      MYSQL_DATABASE: recaptime-wiki-prod
+      MYSQL_USER: wikiuser
+      MYSQL_PASSWORD: 9d7f647cfa812c00236477ea965d49ffe9bb1f511509d30a
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+    volumes:
+      - mediawiki-db:/var/lib/mysql
+
+volumes:
+  mediawiki-db:
+  mediawiki-image-store:
